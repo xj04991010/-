@@ -25,15 +25,15 @@ Converted files will be written to `OUTPUT_DIR` with the same file names. Both t
 
 ## Graphical Interface
 
-A minimal GUI is provided in `gui.py` for those who prefer not to use the
-command line. Launch it with:
+`gui.py` provides a small interface with rounded buttons reminiscent of a mobile
+app. It converts one `.srt` file at a time. Launch it with:
 
 ```bash
 python gui.py
 ```
 
-Use the dialog buttons to pick the input and output folders and start the
-conversion.
+Use the dialog buttons to choose the subtitle file and where to save the
+converted version.
 
 ## Building an executable
 

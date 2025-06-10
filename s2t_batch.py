@@ -3,6 +3,15 @@ import pathlib
 from opencc import OpenCC
 
 
+def convert_file(input_path: pathlib.Path, output_path: pathlib.Path) -> None:
+    """Convert a single text-based file to Traditional Chinese."""
+
+    cc = OpenCC("s2t")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    traditional = cc.convert(input_path.read_text(encoding="utf-8"))
+    output_path.write_text(traditional, encoding="utf-8")
+
+
 def convert_directory(
     input_dir: pathlib.Path,
     output_dir: pathlib.Path,
@@ -21,12 +30,10 @@ def convert_directory(
         are processed.
     """
 
-    cc = OpenCC("s2t")  # Simplified Chinese to Traditional Chinese
     output_dir.mkdir(parents=True, exist_ok=True)
     for ext in extensions:
         for path in input_dir.glob(f"*{ext}"):
-            traditional = cc.convert(path.read_text(encoding="utf-8"))
-            (output_dir / path.name).write_text(traditional, encoding="utf-8")
+            convert_file(path, output_dir / path.name)
 
 
 def main() -> None:
