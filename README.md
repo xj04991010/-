@@ -22,3 +22,15 @@ python s2t_batch.py INPUT_DIR OUTPUT_DIR
 ```
 
 Converted files will be written to `OUTPUT_DIR` with the same file names.
+
+## Graphical Interface
+
+A minimal GUI is provided in `gui.py` for those who prefer not to use the
+command line. Launch it with:
+
+```bash
+python gui.py
+```
+
+Use the dialog buttons to pick the input and output folders and start the
+conversion.
