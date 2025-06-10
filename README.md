@@ -22,3 +22,14 @@ python s2t_batch.py INPUT_DIR OUTPUT_DIR
 ```
 
 Converted files will be written to `OUTPUT_DIR` with the same file names.
+
+## Drag-and-drop GUI
+
+For quick conversion of individual `.srt` subtitle files, a simple GUI is provided.
+Run the script and drag an `.srt` file onto the window (or click to browse):
+
+```bash
+python s2t_gui.py
+```
+
+The converted subtitle will be saved next to the original file with a `_trad.srt` suffix.
