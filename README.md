@@ -4,27 +4,38 @@ This repository contains the starting point for the Replan mobile-first web app 
 
 ## Requirements
 - Node.js 18+
-- Yarn or npm
-- Firebase project (Google provider enabled) with Firestore
+- Yarn or npm (prefer npm for parity with scripts)
+- Firebase project with **Google Sign-In enabled** and **Firestore**
 
-## Setup
-1. Install dependencies:
+## Quickstart（一步一步照做）
+1) **安裝依賴**
    ```bash
    npm install
    ```
-2. Create a `.env.local` file with your Firebase config:
-   ```bash
-   NEXT_PUBLIC_FIREBASE_API_KEY=...
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
-   NEXT_PUBLIC_FIREBASE_APP_ID=...
-   ```
-3. Run the dev server:
+   - 如果遇到 registry 403/連不上的情況，請改用公司鏡像或 `npm config set registry <your-registry>` 後重試。
+
+2) **填環境變數**
+   - 複製範本建立 `.env.local`：
+     ```bash
+     cp .env.example .env.local
+     ```
+   - 到 Firebase 控制台 > 專案設定 > 一般 > 你的應用，複製 Web App 的設定值填入 `.env.local`。
+
+3) **啟動本機開發伺服器**
    ```bash
    npm run dev
    ```
+   - 預設跑在 http://localhost:3000
+
+4) **登入與路由守衛**
+   - 首次進入會被導向 `/login`，用 Google 登入後會自動建立 `users/{uid}` 文件並跳到 `/onboarding`。
+   - Onboarding 至少填 3 個任務後，才會被帶到 `/dashboard`。
+
+5) **頁面巡覽（按照 PRD）**
+   - `/dashboard`：每日勾選 + 心情滑桿 + 備註，500ms debounce 寫入 Firestore。
+   - `/history`：目前為圖表 placeholder，可接上 Recharts。
+   - `/coach`：free 用戶為 fake door，pro 用戶保留週報生成入口。
+   - `/settings`：顯示登入資訊與 Sign Out。
 
 ## Implemented routes
 - `/login` – Google sign-in entry point.
