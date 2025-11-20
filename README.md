@@ -1,49 +1,40 @@
-# Simplified to Traditional Chinese Batch Converter
+# Replan MVP Skeleton
 
-This repository contains a simple Python script to batch convert subtitle or text files from simplified Chinese to traditional Chinese using [OpenCC](https://github.com/BYVoid/OpenCC).
+This repository contains the starting point for the Replan mobile-first web app described in the PRD. It sets up a Next.js 14 (App Router) + TypeScript + Tailwind CSS stack, basic route structure, and a minimal AuthProvider wired to Firebase Auth/Firestore.
 
 ## Requirements
+- Node.js 18+
+- Yarn or npm
+- Firebase project (Google provider enabled) with Firestore
 
-- Python 3
-- `opencc-python-reimplemented` package
+## Setup
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Create a `.env.local` file with your Firebase config:
+   ```bash
+   NEXT_PUBLIC_FIREBASE_API_KEY=...
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+   NEXT_PUBLIC_FIREBASE_APP_ID=...
+   ```
+3. Run the dev server:
+   ```bash
+   npm run dev
+   ```
 
-Install dependencies with:
+## Implemented routes
+- `/login` – Google sign-in entry point.
+- `/onboarding` – collect the user’s 3-10 custom daily tasks.
+- `/dashboard` – daily checklist, mood slider, and note with debounced Firestore writes.
+- `/history` – placeholder for upcoming completion/mood charts.
+- `/coach` – fake-door flow for free users and pro placeholder.
+- `/settings` – basic account info and sign-out.
 
-```bash
-pip install opencc-python-reimplemented
-```
-
-## Usage
-
-Prepare a directory with `.txt` or `.srt` files written in simplified Chinese. Run the script with the input and output directories:
-
-```bash
-python s2t_batch.py INPUT_DIR OUTPUT_DIR
-```
-
-Converted files will be written to `OUTPUT_DIR` with the same file names. Both text and subtitle files are supported by default.
-
-## Graphical Interface
-
-A minimal GUI is provided in `gui.py` for those who prefer not to use the
-command line. Launch it with:
-
-```bash
-python gui.py
-```
-
-Use the dialog buttons to pick the input and output folders and start the
-conversion.
-
-## Building an executable
-
-To distribute the converter to computers without Python installed, you can
-create a standalone executable using
-[PyInstaller](https://pyinstaller.org/):
-
-```bash
-pyinstaller --onefile gui.py
-```
-
-The resulting binary will be placed in the `dist` directory. On Windows it will
-be `gui.exe`.
+## Notes
+- Types for core Firestore collections live in `types/index.ts` per the PRD.
+- The AuthProvider enforces login and onboarding guardrails; it expects user profiles to live under `users/{uid}`.
+- UI is intentionally minimal; shadcn/ui components can be added incrementally as the app evolves.
